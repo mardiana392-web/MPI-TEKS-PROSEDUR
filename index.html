@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jelajah Teks Prosedur | MPI Bahasa Indonesia VII</title>
+<style>
+:root{--navy:#172554;--blue:#2563eb;--teal:#0f766e;--lime:#d9f99d;--cream:#fffdf5;--ink:#172033;--muted:#5b6475;--pink:#fce7f3;--sky:#dbeafe;--line:#dbe3ef;--shadow:0 18px 45px rgba(23,37,84,.13)}
+*{box-sizing:border-box} body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;background:linear-gradient(135deg,#eff6ff,#f0fdfa 55%,#fefce8);color:var(--ink);min-height:100vh}
+button,input{font:inherit} button{cursor:pointer;border:0}
+.app{max-width:1120px;margin:auto;padding:18px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 4px 18px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:850;color:var(--navy);letter-spacing:-.3px}.brand-icon{display:grid;place-items:center;width:42px;height:42px;background:var(--navy);color:#fff;border-radius:14px;font-size:22px;box-shadow:0 7px 15px #17255433}
+.pill{font-size:12px;font-weight:800;background:#fff;border:1px solid var(--line);padding:8px 12px;border-radius:99px;color:var(--muted)}
+main{min-height:70vh}.screen{display:none;animation:rise .28s ease}.screen.active{display:block}@keyframes rise{from{opacity:.35;transform:translateY(8px)}to{opacity:1;transform:none}}
+.hero{position:relative;overflow:hidden;border-radius:30px;background:var(--navy);color:#fff;padding:clamp(28px,5vw,58px);box-shadow:var(--shadow);display:grid;grid-template-columns:1.25fr .75fr;gap:24px;align-items:center;min-height:430px}
+.hero:after{content:"";position:absolute;width:360px;height:360px;border-radius:50%;background:#2563eb55;right:-100px;top:-110px}.hero-copy,.hero-art{position:relative;z-index:1}.eyebrow{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--lime);font-weight:900}.hero h1{font-size:clamp(34px,5vw,58px);line-height:1.02;letter-spacing:-2px;margin:14px 0}.hero p{color:#dbeafe;max-width:560px;line-height:1.7}.hero-art{display:grid;place-items:center;font-size:clamp(100px,18vw,180px);filter:drop-shadow(0 18px 12px #0003);transform:rotate(-7deg)}
+.btn{border-radius:13px;padding:12px 17px;font-weight:800;transition:.15s;display:inline-flex;align-items:center;justify-content:center;gap:8px}.btn:hover{transform:translateY(-2px)}.primary{background:var(--lime);color:var(--navy)}.blue{background:var(--blue);color:white}.dark{background:var(--navy);color:white}.soft{background:#eff6ff;color:var(--navy);border:1px solid #bfdbfe}.outline{background:#fff;border:1px solid var(--line);color:var(--ink)}.btn:focus-visible,button:focus-visible{outline:3px solid #f59e0b;outline-offset:3px}
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;margin:12px 0 22px}.section-head h2{font-size:clamp(25px,4vw,36px);margin:4px 0;color:var(--navy);letter-spacing:-1px}.section-head p{margin:0;color:var(--muted);line-height:1.6}.back{color:var(--navy);background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 13px;font-weight:800;white-space:nowrap}
+.menu-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.menu-card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px 18px;text-align:left;box-shadow:0 8px 22px #1725540a;min-height:180px;transition:.18s}.menu-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}.menu-card .emoji{font-size:35px;display:block;margin-bottom:18px}.menu-card h3{margin:0 0 7px;color:var(--navy)}.menu-card p{font-size:13px;color:var(--muted);line-height:1.5;margin:0}
+.panel{background:#fff;border:1px solid var(--line);border-radius:24px;padding:clamp(18px,3vw,30px);box-shadow:0 10px 30px #1725540b;margin-bottom:18px}.two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px}.callout{background:#f0fdfa;border-left:5px solid var(--teal);border-radius:12px;padding:15px 17px;line-height:1.65}.warm{background:#fffbeb;border-left-color:#f59e0b}.label{font-size:11px;letter-spacing:1.3px;font-weight:900;text-transform:uppercase;color:var(--teal)}h3{color:var(--navy)}.panel h3{margin-top:6px}.panel p,.panel li{line-height:1.7}.structure{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.step-card{border:1px solid var(--line);border-radius:16px;padding:16px;background:#fbfdff}.step-num{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:var(--sky);font-weight:900;color:var(--navy);margin-bottom:10px}.step-card p{font-size:14px;margin:6px 0 0;color:var(--muted)}
+.recipe{background:#fff7ed;border-radius:18px;padding:18px;border:1px solid #fed7aa}.recipe h3{margin:0 0 8px}.recipe ol{padding-left:22px}.chip{display:inline-block;background:#eef2ff;color:#3730a3;padding:5px 9px;border-radius:99px;font-size:12px;font-weight:800;margin:3px}
+.sim-layout{display:grid;grid-template-columns:.85fr 1.15fr;gap:18px}.choice-list{display:flex;flex-direction:column;gap:10px}.choice{background:#f8fafc;border:1.5px solid var(--line);border-radius:13px;padding:12px;text-align:left;font-weight:700;color:var(--ink)}.choice.selected{border-color:var(--blue);background:#eff6ff}.choice.correct{border-color:#16a34a;background:#f0fdf4}.choice.wrong{border-color:#dc2626;background:#fef2f2}.drop-zone{border:2px dashed #93c5fd;border-radius:16px;padding:14px;min-height:78px;background:#f8fbff;margin:9px 0}.drop-zone strong{display:block;color:var(--navy);margin-bottom:6px}.drop-zone.over{background:#dbeafe}.drop-zone .placed{display:inline-block;background:white;border:1px solid #bfdbfe;border-radius:9px;padding:8px;margin:3px;font-size:13px}
+.feedback{padding:12px 14px;border-radius:12px;background:#f1f5f9;color:var(--ink);margin-top:12px;line-height:1.6}.feedback.good{background:#dcfce7;color:#166534}.feedback.bad{background:#fee2e2;color:#991b1b}
+.quiz-progress{height:8px;background:#e2e8f0;border-radius:99px;overflow:hidden;margin:12px 0 22px}.quiz-progress span{display:block;height:100%;background:var(--teal);width:0;transition:.3s}.answers{display:grid;gap:10px;margin:18px 0}.answer{padding:14px 16px;border-radius:14px;text-align:left;background:#f8fafc;border:1.5px solid var(--line);font-weight:700}.answer:hover{background:#eff6ff;border-color:#93c5fd}.answer.chosen{background:#dbeafe;border-color:var(--blue)}.answer.correct{background:#dcfce7;border-color:#16a34a}.answer.wrong{background:#fee2e2;border-color:#dc2626}
+.result{display:grid;place-items:center;text-align:center;padding:35px}.score-circle{width:140px;height:140px;border-radius:50%;display:grid;place-items:center;background:var(--navy);color:white;font-size:38px;font-weight:900;margin:12px auto 18px;border:9px solid var(--lime)}
+.profile-mark{width:90px;height:90px;display:grid;place-items:center;border-radius:25px;background:var(--navy);color:white;font-size:40px;margin-bottom:14px}.footer{display:flex;justify-content:space-between;gap:12px;align-items:center;color:var(--muted);font-size:12px;padding:22px 4px}.toast{font-size:13px;color:var(--muted)}
+@media(max-width:780px){.hero{grid-template-columns:1fr;min-height:auto}.hero-art{position:absolute;right:5px;bottom:5px;opacity:.25;font-size:130px}.hero-copy{max-width:600px}.menu-grid{grid-template-columns:repeat(2,1fr)}.two-col,.sim-layout{grid-template-columns:1fr}.structure{grid-template-columns:1fr}.section-head{align-items:flex-start}.pill{display:none}}
+@media(max-width:440px){#voicePanel{right:10px;bottom:10px}#voiceStatus{display:none}}
+@media(max-width:440px){.app{padding:12px}.menu-grid{gap:9px}.menu-card{padding:15px;min-height:160px}.menu-card .emoji{font-size:28px}.hero{padding:26px 22px}.hero h1{letter-spacing:-1px}.footer{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="topbar">
+  <div class="brand"><span class="brand-icon">✦</span><span>JELAJAH BAHASA <small style="display:block;font-size:10px;letter-spacing:1.4px;color:#64748b">MEDIA PEMBELAJARAN INTERAKTIF</small></span></div>
+  <div class="pill">BAHASA INDONESIA · KELAS VII</div>
+</header>
+<main>
+<section id="splash" class="screen active">
+  <div class="hero">
+    <div class="hero-copy"><div class="eyebrow">Fase D · Kurikulum Merdeka</div><h1>Jelajah<br>Teks Prosedur<span style="color:var(--lime)">.</span></h1><p>Kenali tujuan, bongkar struktur, temukan ciri kebahasaan, lalu uji kemampuanmu melalui aktivitas interaktif yang dekat dengan kehidupan sehari-hari.</p><button class="btn primary" onclick="showScreen('home')">Mulai Belajar <span>→</span></button><p style="font-size:12px;margin-top:18px">Belajar mandiri • Dapat digunakan secara luring • Progres selama sesi ini</p></div>
+    <div class="hero-art" aria-hidden="true">🥤</div>
+  </div>
+</section>
+<section id="home" class="screen">
+  <div class="section-head"><div><div class="label">Selamat datang, penjelajah!</div><h2>Pilih petualanganmu</h2><p>Pelajari konsep, praktikkan, lalu buktikan pemahamanmu.</p></div></div>
+  <div class="menu-grid">
+    <button class="menu-card" onclick="showScreen('materi')"><span class="emoji">📚</span><h3>Materi</h3><p>Pahami tujuan, struktur, dan ciri kebahasaan.</p></button>
+    <button class="menu-card" onclick="showScreen('simulasi')"><span class="emoji">🧩</span><h3>Simulasi</h3><p>Jadi detektif dan cocokkan bagian teks.</p></button>
+    <button class="menu-card" onclick="startQuiz()"><span class="emoji">🎯</span><h3>Kuis</h3><p>Jawab tiga soal dan lihat hasilmu.</p></button>
+    <button class="menu-card" onclick="showScreen('profil')"><span class="emoji">👩‍🏫</span><h3>Profil</h3><p>Informasi media dan petunjuk penggunaan.</p></button>
+  </div>
+  <div class="panel" style="margin-top:20px"><div class="label">Perjalanan belajarmu</div><h3 style="margin-bottom:8px">Progres sesi ini</h3><div class="quiz-progress"><span id="homeProgress"></span></div><p id="progressText" class="toast">Materi belum ditandai selesai. Kamu bisa mulai dari bagian mana saja.</p></div>
+</section>
+<section id="materi" class="screen">
+  <div class="section-head"><div><div class="label">01 · Kenali konsep</div><h2>Materi Teks Prosedur</h2><p>Baca ringkasan, perhatikan contoh, dan temukan pola teksnya.</p></div><button class="back" onclick="showScreen('home')">← Menu</button></div>
+  <div class="panel"><div class="label">Pengertian</div><h3>Apa itu teks prosedur?</h3><p>Teks prosedur adalah teks yang berisi tujuan dan langkah-langkah untuk melakukan atau membuat sesuatu secara runtut agar pembaca dapat mengikuti proses dengan benar.</p><div class="callout"><strong>Tujuan utama:</strong> memberi petunjuk yang jelas, runtut, dan mudah diikuti. Contohnya cara membuat minuman, menggunakan alat, atau melakukan suatu kegiatan.</div></div>
+  <div class="panel"><div class="label">Struktur teks</div><h3>Tiga bagian yang perlu dikenali</h3><div class="structure">
+    <div class="step-card"><div class="step-num">1</div><h3>Tujuan</h3><p>Menjelaskan hasil atau hal yang akan dilakukan/dibuat.</p></div>
+    <div class="step-card"><div class="step-num">2</div><h3>Alat dan bahan</h3><p>Daftar perlengkapan atau bahan yang diperlukan, jika dibutuhkan.</p></div>
+    <div class="step-card"><div class="step-num">3</div><h3>Langkah-langkah</h3><p>Urutan tindakan yang logis. Penutup dapat ditambahkan bila sesuai.</p></div>
+  </div></div>
+  <div class="panel"><div class="label">Ciri kebahasaan</div><h3>Petunjuk bahasa yang sering muncul</h3>
+    <span class="chip">Kata kerja perintah</span><span class="chip">Kata kerja tindakan</span><span class="chip">Penanda urutan</span><span class="chip">Keterangan cara/waktu</span>
+    <div class="two-col" style="margin-top:12px"><div><strong>Contoh kata kerja perintah</strong><p>Potong, masukkan, aduk, tuangkan, sajikan.</p></div><div><strong>Contoh penanda urutan</strong><p>Pertama, kemudian, setelah itu, terakhir.</p></div></div>
+  </div>
+  <div class="panel recipe"><h3>Contoh: Cara Membuat Jus Buah Naga</h3><p><strong>Tujuan:</strong> Membuat segelas jus buah naga yang segar.</p><p><strong>Alat dan bahan:</strong> Buah naga, air atau susu, blender, pisau, gelas, dan sendok. Gunakan pisau dengan hati-hati dan minta bantuan orang dewasa bila diperlukan.</p><strong>Langkah-langkah:</strong><ol><li>Pertama, cuci buah naga dan siapkan alat serta bahan.</li><li>Kemudian, kupas buah naga dan potong menjadi bagian kecil dengan hati-hati.</li><li>Setelah itu, masukkan potongan buah ke dalam blender dan tambahkan air atau susu secukupnya.</li><li>Blender hingga halus.</li><li>Terakhir, tuangkan jus ke dalam gelas dan sajikan.</li></ol></div>
+  <div class="callout warm"><strong>Pikir kritis:</strong> Jika langkah “potong buah” diletakkan sebelum “cuci buah”, apa yang perlu diperbaiki? Jelaskan alasanmu.</div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px"><button class="btn blue" onclick="markMateri()">✓ Tandai Materi Selesai</button><button class="btn outline" onclick="showScreen('simulasi')">Lanjut ke Simulasi →</button></div>
+</section>
+<section id="simulasi" class="screen">
+  <div class="section-head"><div><div class="label">02 · Belajar dengan mencoba</div><h2>Detektif Teks Prosedur</h2><p>Pilih kartu, lalu tentukan kategori yang paling tepat.</p></div><button class="back" onclick="showScreen('home')">← Menu</button></div>
+  <div class="panel"><div class="callout"><strong>Misi:</strong> Cocokkan setiap potongan teks dengan kategorinya. Klik potongan teks, kemudian klik kategori tujuan. Skor latihan tidak mengurangi nilai kuis.</div><div id="simScore" style="margin-top:12px;font-weight:800;color:var(--teal)">Tepat: 0 dari 6</div></div>
+  <div class="sim-layout">
+    <div class="panel"><div class="label">Kartu potongan teks</div><h3>Pilih satu kartu</h3><div id="choices" class="choice-list"></div></div>
+    <div class="panel"><div class="label">Tempatkan di kategori</div><h3>Ke mana kartu ini cocok?</h3>
+      <button class="drop-zone" onclick="placeCard('tujuan')"><strong>🎯 Tujuan</strong><span id="placed-tujuan" class="toast">Klik di sini untuk menempatkan kartu.</span></button>
+      <button class="drop-zone" onclick="placeCard('alat')"><strong>🧰 Alat dan bahan</strong><span id="placed-alat" class="toast">Klik di sini untuk menempatkan kartu.</span></button>
+      <button class="drop-zone" onclick="placeCard('langkah')"><strong>👣 Langkah-langkah</strong><span id="placed-langkah" class="toast">Klik di sini untuk menempatkan kartu.</span></button>
+      <div id="simFeedback" class="feedback" aria-live="polite">Pilih kartu di sebelah kiri untuk memulai.</div><button class="btn outline" style="margin-top:12px" onclick="resetSim()">Ulangi Simulasi</button>
+    </div>
+  </div>
+  <div class="panel"><div class="label">Tantangan berpikir kritis</div><h3>Apakah prosedur ini sudah baik?</h3><p>Temanmu menulis: “Masukkan buah naga ke blender. Sajikan. Potong buah. Cuci buah.”</p><p><strong>Pertanyaan:</strong> Sebutkan dua hal yang perlu diperbaiki agar prosedur lebih runtut dan aman.</p><textarea id="criticalAnswer" rows="3" style="width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;resize:vertical" placeholder="Tuliskan alasanmu di sini..."></textarea><button class="btn blue" style="margin-top:10px" onclick="checkCritical()">Periksa Refleksi</button><div id="criticalFeedback" class="feedback" style="display:none"></div></div>
+</section>
+<section id="kuis" class="screen">
+  <div class="section-head"><div><div class="label">03 · Buktikan pemahaman</div><h2>Kuis Cepat</h2><p>Tiga soal pilihan ganda. Pilih satu jawaban terbaik.</p></div><button class="back" onclick="showScreen('home')">← Menu</button></div>
+  <div class="panel" id="quizPanel"><div style="display:flex;justify-content:space-between;gap:10px"><span class="label" id="qNumber">SOAL 1 DARI 3</span><span class="toast">Nilai tersimpan selama halaman terbuka</span></div><div class="quiz-progress"><span id="qProgress"></span></div><h3 id="qText">Pertanyaan</h3><div id="answers" class="answers"></div><div id="qFeedback" class="feedback" style="display:none" aria-live="polite"></div><div style="display:flex;justify-content:flex-end;margin-top:14px"><button id="nextQ" class="btn blue" onclick="nextQuestion()" disabled>Soal Berikutnya →</button></div></div>
+  <div class="panel result" id="quizResult" style="display:none"><div class="label">Hasil kuis</div><div class="score-circle"><span id="finalScore">0</span></div><h2 id="resultTitle">Terus berlatih!</h2><p id="resultMessage"></p><div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><button class="btn blue" onclick="startQuiz()">Coba Lagi</button><button class="btn outline" onclick="showScreen('materi')">Pelajari Materi Lagi</button><button class="btn dark" onclick="showScreen('home')">Kembali ke Menu</button></div></div>
+</section>
+<section id="profil" class="screen">
+  <div class="section-head"><div><div class="label">Tentang media</div><h2>Profil MPI</h2><p>Informasi pembelajaran dan cara menggunakan media.</p></div><button class="back" onclick="showScreen('home')">← Menu</button></div>
+  <div class="panel"><div class="profile-mark">✦</div><div class="label">Media Pembelajaran Interaktif</div><h2 style="color:var(--navy)">Jelajah Teks Prosedur</h2><p><strong>Mata pelajaran:</strong> Bahasa Indonesia</p><p><strong>Kelas/Fase:</strong> VII / Fase D</p><p><strong>Nama Guru:</strong> Mardiana, S.Pd.</p><p><strong>Asal Sekolah:</strong> SMP Negeri 12 Kolaka Utara</p><p><strong>Kurikulum:</strong> Kurikulum Merdeka</p><p><strong>Fokus:</strong> tujuan, struktur, ciri kebahasaan teks prosedur, dan berpikir kritis melalui konteks sehari-hari.</p><div class="callout"><strong>Petunjuk penggunaan</strong><ol><li>Pilih menu Materi untuk mempelajari konsep.</li><li>Masuk Simulasi untuk mengelompokkan potongan teks.</li><li>Jawab semua soal di menu Kuis untuk melihat skor.</li><li>Gunakan tombol kembali untuk berpindah menu.</li></ol></div><p style="font-size:13px;color:var(--muted)">Media ini disusun untuk pembelajaran Bahasa Indonesia kelas VII di SMP Negeri 12 Kolaka Utara dan dapat disesuaikan dengan tujuan pembelajaran serta ATP yang digunakan guru.</p></div>
+</section>
+</main>
+
+<div id="voicePanel" style="position:fixed;right:18px;bottom:18px;z-index:1000;display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end;max-width:calc(100vw - 28px);">
+  <span id="voiceStatus" role="status" style="background:#fff;border:1px solid #dbe3ef;border-radius:12px;padding:9px 11px;font-size:12px;color:#172554;box-shadow:0 8px 22px #17255418">Suara Bahasa Indonesia</span>
+  <button class="btn dark" id="readButton" onclick="readCurrentScreen()" aria-label="Bacakan halaman aktif">🔊 Bacakan</button>
+  <button class="btn outline" id="stopButton" onclick="stopReading()" aria-label="Hentikan suara">■ Stop</button>
+</div>
+
+<footer class="footer"><span>© Jelajah Bahasa · MPI Teks Prosedur</span><span>Dirancang untuk belajar aktif, mandiri, dan reflektif.</span></footer>
+</div>
+<script>
+const screens=['splash','home','materi','simulasi','kuis','profil'];
+let materiSelesai=false,simSelesai=false,quizSelesai=false;
+function showScreen(id){screens.forEach(s=>document.getElementById(s).classList.toggle('active',s===id));if(id==='home')updateProgress();window.scrollTo({top:0,behavior:'smooth'});}
+function updateProgress(){let n=(materiSelesai?1:0)+(simSelesai?1:0)+(quizSelesai?1:0);document.getElementById('homeProgress').style.width=(n/3*100)+'%';document.getElementById('progressText').textContent=`${n} dari 3 aktivitas utama selesai. ${n===3?'Hebat, semua aktivitas telah kamu selesaikan!':'Lanjutkan petualangan belajarmu.'}`;}
+function markMateri(){materiSelesai=true;updateProgress();alert('Materi ditandai selesai. Sekarang coba Simulasi atau Kuis!');}
+const simCards=[
+{id:1,text:'Membuat segelas jus buah naga yang segar.',cat:'tujuan'},
+{id:2,text:'Buah naga, air atau susu, blender, pisau, gelas.',cat:'alat'},
+{id:3,text:'Cuci buah naga dan siapkan alat serta bahan.',cat:'langkah'},
+{id:4,text:'Potong buah menjadi bagian kecil dengan hati-hati.',cat:'langkah'},
+{id:5,text:'Blender hingga halus.',cat:'langkah'},
+{id:6,text:'Tuangkan jus ke dalam gelas dan sajikan.',cat:'langkah'}
+];
+let selectedCard=null,simPlaced={},simCorrect=0;
+function renderSim(){let c=document.getElementById('choices');c.innerHTML='';simCards.forEach(card=>{if(simPlaced[card.id])return;let b=document.createElement('button');b.className='choice'+(selectedCard===card.id?' selected':'');b.textContent=card.text;b.onclick=()=>{selectedCard=card.id;renderSim();document.getElementById('simFeedback').className='feedback';document.getElementById('simFeedback').textContent='Kartu dipilih. Sekarang pilih kategori di sebelah kanan.'};c.appendChild(b)});['tujuan','alat','langkah'].forEach(cat=>{let list=simCards.filter(x=>simPlaced[x.id]===cat);document.getElementById('placed-'+cat).innerHTML=list.length?list.map(x=>`<span class="placed">${x.text}</span>`).join(''):'Klik di sini untuk menempatkan kartu.'});document.getElementById('simScore').textContent=`Tepat: ${simCorrect} dari ${Object.keys(simPlaced).length} kartu diperiksa`;}
+function placeCard(cat){if(!selectedCard){document.getElementById('simFeedback').textContent='Pilih kartu terlebih dahulu.';return}let card=simCards.find(x=>x.id===selectedCard);if(!card)return;simPlaced[card.id]=cat;if(card.cat===cat){simCorrect++;document.getElementById('simFeedback').className='feedback good';document.getElementById('simFeedback').textContent='Tepat! Kamu berhasil mengenali bagian teks ini.'}else{document.getElementById('simFeedback').className='feedback bad';document.getElementById('simFeedback').textContent=`Belum tepat. Potongan ini termasuk kategori “${{tujuan:'Tujuan',alat:'Alat dan bahan',langkah:'Langkah-langkah'}[card.cat]}”. Perhatikan fungsi kalimatnya.`}selectedCard=null;renderSim();if(Object.keys(simPlaced).length===simCards.length){simSelesai=true;updateProgress();document.getElementById('simFeedback').textContent+=` Simulasi selesai: ${simCorrect} dari 6 jawaban tepat. Kamu bisa mengulang untuk berlatih lagi.`}}
+function resetSim(){selectedCard=null;simPlaced={};simCorrect=0;renderSim();document.getElementById('simFeedback').className='feedback';document.getElementById('simFeedback').textContent='Pilih kartu di sebelah kiri untuk memulai.'}
+function checkCritical(){let v=document.getElementById('criticalAnswer').value.trim(),f=document.getElementById('criticalFeedback');f.style.display='block';if(v.length<12){f.className='feedback bad';f.textContent='Coba jelaskan lebih lengkap. Sebutkan urutan yang perlu diperbaiki dan alasan keamanan/kebersihannya.'}else{f.className='feedback good';f.innerHTML='<strong>Contoh jawaban:</strong> Cuci buah terlebih dahulu, lalu kupas dan potong dengan hati-hati, baru masukkan ke blender. Langkah “sajikan” diletakkan setelah jus selesai diblender. Urutan yang benar menjaga kebersihan dan membuat petunjuk mudah diikuti. Bandingkan dengan jawabanmu.'}}
+const questions=[
+{q:'Apa tujuan utama teks prosedur?',a:['Menceritakan pengalaman pribadi','Memberi petunjuk melakukan atau membuat sesuatu','Menggambarkan tokoh secara rinci','Menyampaikan pendapat tanpa alasan'],correct:1,why:'Teks prosedur membantu pembaca melakukan atau membuat sesuatu melalui petunjuk yang runtut.'},
+{q:'Bagian yang berisi urutan tindakan untuk mencapai tujuan disebut …',a:['Orientasi','Deskripsi','Langkah-langkah','Kesimpulan'],correct:2,why:'Langkah-langkah berisi tindakan yang disusun secara logis dan berurutan.'},
+{q:'Kalimat “Kemudian, tuangkan jus ke dalam gelas” menunjukkan …',a:['Kata sifat dan perbandingan','Penanda urutan dan kata kerja tindakan','Kalimat tanya','Ungkapan perasaan'],correct:1,why:'“Kemudian” menandai urutan, sedangkan “tuangkan” merupakan kata kerja perintah/tindakan.'}
+];
+let qIndex=0,qAnswers=[],qLocked=false;
+function startQuiz(){qIndex=0;qAnswers=[];qLocked=false;document.getElementById('quizPanel').style.display='block';document.getElementById('quizResult').style.display='none';showScreen('kuis');renderQuestion()}
+function renderQuestion(){let q=questions[qIndex];document.getElementById('qNumber').textContent=`SOAL ${qIndex+1} DARI ${questions.length}`;document.getElementById('qProgress').style.width=((qIndex)/questions.length*100)+'%';document.getElementById('qText').textContent=q.q;document.getElementById('qFeedback').style.display='none';let box=document.getElementById('answers');box.innerHTML='';q.a.forEach((a,i)=>{let b=document.createElement('button');b.className='answer';b.textContent=String.fromCharCode(65+i)+'. '+a;b.onclick=()=>chooseAnswer(i);box.appendChild(b)});let next=document.getElementById('nextQ');next.disabled=true;next.textContent=qIndex===questions.length-1?'Lihat Hasil →':'Soal Berikutnya →';}
+function chooseAnswer(i){if(qLocked)return;qLocked=true;qAnswers[qIndex]=i;let q=questions[qIndex];document.querySelectorAll('.answer').forEach((b,j)=>{if(j===q.correct)b.classList.add('correct');if(j===i&&i!==q.correct)b.classList.add('wrong')});let f=document.getElementById('qFeedback');f.style.display='block';f.className='feedback '+(i===q.correct?'good':'bad');f.innerHTML=(i===q.correct?'<strong>Benar!</strong> ':'<strong>Belum tepat.</strong> ')+q.why;document.getElementById('nextQ').disabled=false;}
+function nextQuestion(){if(!qLocked)return;if(qIndex<questions.length-1){qIndex++;qLocked=false;renderQuestion()}else{let correct=qAnswers.filter((a,i)=>a===questions[i].correct).length,score=Math.round(correct/questions.length*100);quizSelesai=true;updateProgress();document.getElementById('quizPanel').style.display='none';document.getElementById('quizResult').style.display='grid';document.getElementById('finalScore').textContent=score;document.getElementById('resultTitle').textContent=score>=80?'Hebat, penjelajah!':score>=60?'Bagus, terus berlatih!':'Jangan menyerah!';document.getElementById('resultMessage').textContent=`Jawaban benar: ${correct} dari ${questions.length}. Nilai kamu ${score}/100. ${score<80?'Baca kembali materi, lalu coba lagi untuk memperkuat pemahaman.':'Kamu sudah memahami dasar teks prosedur. Coba tantangan berpikir kritis untuk memperdalam kemampuanmu.'}`;document.getElementById('qProgress').style.width='100%';}}
+renderSim();updateProgress();
+
+// Fitur suara: memakai Text-to-Speech yang tersedia di browser/perangkat.
+let voiceUtterance = null;
+function setVoiceStatus(message){const el=document.getElementById('voiceStatus');if(el)el.textContent=message;}
+function stopReading(){
+  if('speechSynthesis' in window){window.speechSynthesis.cancel();}
+  voiceUtterance=null;
+  setVoiceStatus('Suara dihentikan');
+}
+function getActiveReadingText(){
+  const active=document.querySelector('.screen.active');
+  if(!active)return '';
+  const clone=active.cloneNode(true);
+  clone.querySelectorAll('button, textarea, input, .quiz-progress, .toast, #voicePanel').forEach(el=>el.remove());
+  return (clone.innerText||clone.textContent||'').replace(/[ \t]+\n/g,'\n').replace(/\n{3,}/g,'\n\n').trim();
+}
+function readCurrentScreen(){
+  if(!('speechSynthesis' in window) || !('SpeechSynthesisUtterance' in window)){
+    setVoiceStatus('Suara tidak didukung browser ini');alert('Browser ini belum mendukung pembacaan suara. Coba buka MPI di Google Chrome atau Microsoft Edge versi terbaru.');return;
+  }
+  window.speechSynthesis.cancel();
+  const text=getActiveReadingText();
+  if(!text){setVoiceStatus('Tidak ada teks untuk dibacakan');return;}
+  // Potong bacaan panjang menjadi bagian yang nyaman agar tidak terlalu panjang untuk satu ujaran.
+  const chunks=text.match(/[^.!?]+[.!?]?/g)||[text];
+  let index=0;
+  function speakNext(){
+    if(index>=chunks.length){setVoiceStatus('Pembacaan selesai');return;}
+    const chunk=chunks[index++].trim();
+    if(!chunk){speakNext();return;}
+    voiceUtterance=new SpeechSynthesisUtterance(chunk);
+    voiceUtterance.lang='id-ID';
+    voiceUtterance.rate=0.92;
+    voiceUtterance.pitch=1;
+    voiceUtterance.onstart=()=>setVoiceStatus('Sedang membacakan…');
+    voiceUtterance.onend=()=>{if(index<chunks.length)speakNext();else setVoiceStatus('Pembacaan selesai');};
+    voiceUtterance.onerror=()=>{setVoiceStatus('Suara tidak tersedia di perangkat');};
+    const voices=window.speechSynthesis.getVoices();
+    const indonesian=voices.find(v=>/^id(-|$)/i.test(v.lang));
+    if(indonesian)voiceUtterance.voice=indonesian;
+    window.speechSynthesis.speak(voiceUtterance);
+  }
+  setVoiceStatus('Menyiapkan suara…');
+  speakNext();
+}
+if('speechSynthesis' in window){
+  window.speechSynthesis.onvoiceschanged=()=>{};
+}
+
+</script>
+</body>
+</html>
